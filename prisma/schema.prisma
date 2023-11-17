@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// To connect to a SQLite database file. learn more at below links
+// https://www.prisma.io/docs/concepts/database-connectors/sqlite/
+// https://www.prisma.io/docs/reference/database-reference/connection-urls
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Issue {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  status      Int      @default(1)
+}
+
+// status {
+//   1-OPEN
+//   2-IN_PROGRESS
+//   3-CLOSED
+// }
