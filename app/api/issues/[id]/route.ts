@@ -41,7 +41,7 @@ export async function PATCH(
     },
   });
 
-  return NextResponse.json(updatedIssue);
+  return NextResponse.json({});
 }
 
 export async function DELETE(
