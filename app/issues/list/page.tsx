@@ -1,10 +1,24 @@
-import { Link, IssueStatusBadge } from "@/app/components";
+import { IssueStatusBadge, Link } from "@/app/components";
 import prisma from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
 import IssueActions from "./IssueActions";
 
-const IssuesPages = async () => {
-  const isssues = await prisma.issue.findMany();
+type Props = {
+  searchParams: { status: string };
+};
+const IssuesPages = async ({ searchParams }: Props) => {
+  let status = undefined; // undefined: prisma will not pass it as a part of filtering
+  if (searchParams.hasOwnProperty("status")) {
+    // sqlite doesn't support enum, See schema.prisma Issue model for status column
+    if (searchParams.status == "1") status = 1;
+    if (searchParams.status == "2") status = 2;
+    if (searchParams.status == "3") status = 3;
+  }
+  const isssues = await prisma.issue.findMany({
+    where: {
+      status,
+    },
+  });
 
   return (
     <div>
