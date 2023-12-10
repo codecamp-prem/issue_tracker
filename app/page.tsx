@@ -1,7 +1,16 @@
 "use client";
 import { useState } from "react";
+import Pagination from "./components/Pagination";
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { page: string };
+}) {
+  let cPage = isNaN(parseInt(searchParams.page))
+    ? 0
+    : parseInt(searchParams.page);
+
   const [bill, setBill] = useState(50);
   const [tipPercentage, setTipPercentage] = useState(18);
   const [people, setPeople] = useState(1);
@@ -10,6 +19,7 @@ export default function Home() {
   const perPersonTip = totalTip / people;
   return (
     <>
+      <Pagination itemCount={100} pageSize={10} currentPage={cPage} />
       <label htmlFor="bill">Bill : </label>
       <input
         id="bill"
