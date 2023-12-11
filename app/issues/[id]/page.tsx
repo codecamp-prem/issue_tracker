@@ -39,4 +39,18 @@ const IssueDetailPage = async ({ params }: Props) => {
   );
 };
 
+// for SEO
+// Dynamic Metadata
+// You can use generateMetadata function to fetch metadata that requires dynamic values.
+// minimum title, description
+export async function generateMetadata({ params }: Props) {
+  const issue = await prisma.issue.findUnique({
+    where: { id: parseInt(params.id) },
+  });
+  return {
+    title: issue?.title,
+    description: issue?.description,
+  };
+}
+
 export default IssueDetailPage;

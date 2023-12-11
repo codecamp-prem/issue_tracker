@@ -1,6 +1,7 @@
 import Pagination from "@/app/components/Pagination";
 import prisma from "@/prisma/client";
 import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 import IssueActions from "./IssueActions";
 import IssueTable, { IssueQuery, columnNames } from "./IssueTable";
 
@@ -45,6 +46,14 @@ const IssuesPages = async ({ searchParams }: Props) => {
       />
     </Flex>
   );
+};
+
+// for SEO
+// minimum title, description
+// opengraph and twitter property so people can share content in Social media
+export const metadata: Metadata = {
+  title: "[Project Name] Issue List",
+  description: " [better description] View all issue",
 };
 
 export default IssuesPages;

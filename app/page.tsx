@@ -1,5 +1,6 @@
 import prisma from "@/prisma/client";
 import { Flex, Grid } from "@radix-ui/themes";
+import { Metadata } from "next";
 import IssueChart from "./IssueChart";
 import IssueSummery from "./IssueSummery";
 import LatestIssue from "./LatestIssue";
@@ -21,3 +22,12 @@ export default async function Home() {
     </>
   );
 }
+
+// for SEO
+// minimum title, description
+// opengraph and twitter property so people can share content in Social media
+// add same in
+export const metadata: Metadata = {
+  title: "[Project Name] Issue Dashboard",
+  description: " [better description]",
+};
